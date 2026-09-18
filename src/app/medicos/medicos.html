@@ -1,0 +1,66 @@
+<p>medicos pagina!</p>
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>apellido</th>
+            <th>especialidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (medico of listaM; track medico.id) {
+        <tr>
+            <td>{{ medico.id }}</td>
+            <td>{{ medico.nombre }}</td>
+            <td>{{ medico.apellidos }}</td>
+            <td>{{ medico.especialidad }}</td>
+        </tr>
+        } @empty {
+        <tr>
+            <td colspan="4">No hay medicos para mostrar.</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<button class="btn btn-primary" (click)="abrirModal()">Registrar</button>
+
+<div class="modal" tabindex="-1" id="registroMedico">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="cerrarModal()"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Id</label>
+                        <input type="text" class="form-control" [(ngModel)]="medico.id" name="id">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" [(ngModel)]="medico.nombre" name="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" [(ngModel)]="medico.apellidos" name="apellidos">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Especialidad</label>
+                        <input type="text" class="form-control" [(ngModel)]="medico.especialidad" name="especialidad">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarModal()">
+                            Cerrar
+                        </button>
+                        <button type="button" class="btn btn-primary" (click)="guardarMedico()">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
