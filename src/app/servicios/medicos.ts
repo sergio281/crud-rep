@@ -11,6 +11,7 @@ export class MedicosServices {
   private listaM = 'http://localhost:8080/medico/m/listartodo/';
   private MedicosEspecialidad = 'http://localhost:8080/medico/m/buscarespecialidad/';
   private urlGuardar = 'http://localhost:8080/medico/m/guardarMedico/';
+  private urlEliminarMedico = 'http://localhost:8080/medico/m/eliminarMedico/';
 
   constructor(private httpCliente: HttpClient) { }
 
@@ -25,5 +26,9 @@ export class MedicosServices {
 
   guardarMedico(medico: Medicos): Observable<any> {
     return this.httpCliente.post<any>(this.urlGuardar, medico);
+  }
+
+  eliminarMedico(id: number): Observable<any> {
+    return this.httpCliente.post<any>(this.urlEliminarMedico, id);
   }
 }

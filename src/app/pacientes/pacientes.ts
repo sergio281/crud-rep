@@ -75,6 +75,8 @@ export class PacientesComponent implements OnInit {
   }
 
   eliminar(cc: string): void {
+    if (!confirm('¿Estás seguro de eliminar este paciente?')) return;
+
     this.pacienteService.eliminarPaciente(cc).subscribe({
       next: (dato) => {
         console.log(dato);

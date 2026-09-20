@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class MedicosComponent implements OnInit {
   listaM: Medicos[] = [];
   medico: Medicos = new Medicos();
+  bandera: boolean = false;   // false = Registrar, true = Actualizar
 
   constructor(private servicioMedico: MedicosServices, private cdr: ChangeDetectorRef) { }
 
@@ -34,8 +35,15 @@ export class MedicosComponent implements OnInit {
 
   cerrarModal(): void {
     this.medico = new Medicos();
+    this.bandera = false;
     const modal = document.getElementById("registroMedico");
     if (modal != null) modal.style.display = 'none';
+  }
+
+  nuevoMedico(): void {
+    this.medico = new Medicos();
+    this.bandera = false;
+    this.abrirModal();
   }
 
   guardarMedico(): void {
@@ -47,6 +55,26 @@ export class MedicosComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al guardar el médico:', error);
+      }
+    });
+  }
+
+  actualizar(m: Medicos): void {
+    this.medico = { ...m };
+    this.bandera = true;
+    this.abrirModal();
+  }
+
+  eliminar(id: number): void {
+    if (!confirm('¿Estás seguro de eliminar este médico?')) return;
+
+    this.servicioMedico.eliminarMedico(id).subscribe({
+      next: (dato) => {
+        console.log(dato);
+        this.listarMedico();
+      },
+      error: (error) => {
+        console.error('Error al eliminar el médico:', error);
       }
     });
   }

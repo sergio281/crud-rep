@@ -1,71 +1,73 @@
-<h2> CENTRAL CINTAS</h2>
+<h2> CENTRAL CITAS</h2>
 <hr>
 <h4>Solicitar cita</h4>
 
 <label>Especialidad</label>
-<input type="text" id="especialidad" name="especialidad" [(ngModel)]="especialidad" class="form-control" placeholder="Ingrese la especialidad">
+<input type="text" id="especialidad" name="especialidad" [(ngModel)]="especialidad" class="form-control"
+  placeholder="Ingrese la especialidad">
 <br>
 <button type="button" (click)="verEspecialistas()" class="btn btn-primary">Buscar</button>
 <br>
 <br>
 <table class="table table-dark table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Especialidad</th>               
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let i of medicos">
-            <td>{{i.id}}</td>
-            <td>{{i.nombre}}</td>
-            <td>{{i.apellidos}}</td>
-            <td>{{i.especialidad}}</td>
-        
-            <td>
-                <button type="button" class="btn btn-danger" (click)="elegirMedico(i)">
-                   Seleccionar
-                </button> 
-            </td>
-        </tr>            
-    </tbody>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Especialidad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of medicos">
+      <td>{{i.id}}</td>
+      <td>{{i.nombre}}</td>
+      <td>{{i.apellidos}}</td>
+      <td>{{i.especialidad}}</td>
+
+      <td>
+        <button type="button" class="btn btn-danger" (click)="elegirMedico(i)">
+          Seleccionar
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <hr>
 
 <div class="modal" tabindex="-1" id="registro">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="mb-3">
-                  <label class="form-label">Cédula</label>
-                  <input for="inputCedula" type="text" class="form-control" [(ngModel)]="cc" name="cedula">
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Fecha</label>
-                  <input for="inputNombre" type="date" class="form-control" [(ngModel)]="cita.fecha" name="fecha">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Hora</label>
-                    <input for="inputApellidos" type="time" class="form-control" [(ngModel)]="cita.hora" name="hora">
-                </div>
-                 
-                <div class="modal-footer"> 
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarModal()">
-                    Cerrar
-                  </button>
-                 
-                  <button type="submit" class="btn btn-primary" (click)="guardarcita()">Solicitar</button>
-                </div>
-            </form>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="cerrarModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Cédula</label>
+            <input for="inputCedula" type="text" class="form-control" [(ngModel)]="cc" name="cedula">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input for="inputNombre" type="date" class="form-control" [(ngModel)]="cita.fecha" name="fecha">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Hora</label>
+            <input for="inputApellidos" type="time" class="form-control" [(ngModel)]="cita.hora" name="hora">
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarModal()">
+              Cerrar
+            </button>
+
+            <button type="submit" class="btn btn-primary" (click)="guardarcita()">Solicitar</button>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 </div>
