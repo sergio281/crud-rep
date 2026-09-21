@@ -1,0 +1,110 @@
+<h2>Consultas</h2>
+<hr>
+
+<h4>1. Médicos con citas asignadas</h4>
+<button type="button" class="btn btn-primary" (click)="consultarMedicosConCitas()">Consultar</button>
+<ul class="mt-2">
+    @for (m of medicosConCitas; track m) {
+    <li>{{ m }}</li>
+    } @empty {
+    <li>Sin resultados todavía.</li>
+    }
+</ul>
+<hr>
+
+<h4>2. Citas de un paciente (especialidad, médico, hora, fecha)</h4>
+<label>Cédula</label>
+<input type="text" id="cedulaConsulta" class="form-control" placeholder="Ingrese la cédula">
+<br>
+<button type="button" class="btn btn-primary" (click)="consultarCitasPaciente()">Consultar</button>
+<table class="table table-dark table-hover mt-2">
+    <thead>
+        <tr>
+            <th>Especialidad</th>
+            <th>Médico</th>
+            <th>Hora</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (fila of citasPaciente; track $index) {
+        <tr>
+            <td>{{ fila[0] }}</td>
+            <td>{{ fila[1] }}</td>
+            <td>{{ fila[2] }}</td>
+            <td>{{ fila[3] }}</td>
+        </tr>
+        } @empty {
+        <tr>
+            <td colspan="4">Sin resultados.</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<hr>
+
+<h4>3. Cantidad de citas asignadas en una fecha</h4>
+<label>Fecha</label>
+<input type="date" id="fechaAsignadas" class="form-control">
+<br>
+<button type="button" class="btn btn-primary" (click)="consultarCantidadAsignadas()">Consultar</button>
+@if (cantidadAsignadas !== null) {
+<p class="mt-2">Cantidad: {{ cantidadAsignadas }}</p>
+}
+<hr>
+
+<h4>4. Cantidad de citas canceladas en una fecha</h4>
+<label>Fecha</label>
+<input type="date" id="fechaCanceladas" class="form-control">
+<br>
+<button type="button" class="btn btn-primary" (click)="consultarCantidadCanceladas()">Consultar</button>
+@if (cantidadCanceladas !== null) {
+<p class="mt-2">Cantidad: {{ cantidadCanceladas }}</p>
+}
+<hr>
+
+<h4>5. Cambiar estado de una cita a 'asistida'</h4>
+<label>Cédula del paciente</label>
+<input type="text" id="cedulaAsistida" class="form-control" placeholder="Ingrese la cédula">
+<br>
+<button type="button" class="btn btn-primary" (click)="marcarAsistida()">Marcar asistida</button>
+@if (mensajeAsistida) {
+<p class="mt-2">{{ mensajeAsistida }}</p>
+}
+<hr>
+
+<h4>6. Cuántas citas tiene asignada cada médico en una fecha</h4>
+<label>Fecha</label>
+<input type="date" id="fechaPorMedico" class="form-control">
+<br>
+<button type="button" class="btn btn-primary" (click)="consultarCitasPorMedicoFecha()">Consultar</button>
+<table class="table table-dark table-hover mt-2">
+    <thead>
+        <tr>
+            <th>Médico</th>
+            <th>Cantidad de citas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (fila of citasPorMedico; track $index) {
+        <tr>
+            <td>{{ fila[0] }}</td>
+            <td>{{ fila[1] }}</td>
+        </tr>
+        } @empty {
+        <tr>
+            <td colspan="2">Sin resultados.</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<hr>
+
+<h4>7. Cuántos pacientes asistieron en una fecha</h4>
+<label>Fecha</label>
+<input type="date" id="fechaAsistieron" class="form-control">
+<br>
+<button type="button" class="btn btn-primary" (click)="consultarPacientesAsistieron()">Consultar</button>
+@if (pacientesAsistieron !== null) {
+<p class="mt-2">Cantidad: {{ pacientesAsistieron }}</p>
+}
