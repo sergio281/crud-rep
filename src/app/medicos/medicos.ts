@@ -78,4 +78,20 @@ export class MedicosComponent implements OnInit {
       }
     });
   }
+
+  buscarMedico(): void {
+    const id = (document.getElementById("idMedico") as HTMLInputElement).value;
+
+    this.servicioMedico.buscarMedico(id).subscribe(
+      dato => {
+        console.log(dato);
+        this.listaM = [dato];
+        this.cdr.detectChanges();
+      },
+      error => {
+        console.error('Error al buscar el médico:', error);
+        alert("No se encontró el médico con el id ingresado.");
+      }
+    );
+  }
 }

@@ -87,4 +87,20 @@ export class PacientesComponent implements OnInit {
       }
     });
   }
+
+  buscarPaciente(): void {
+    const cc = (document.getElementById("cedula") as HTMLInputElement).value;
+
+    this.pacienteService.buscarPaciente(cc).subscribe(
+      dato => {
+        console.log(dato);
+        this.listaPacientes = [dato];
+        this.cdr.detectChanges();
+      },
+      error => {
+        console.error('Error al buscar el paciente:', error);
+        alert("No se encontró el paciente con la cédula ingresada.");
+      }
+    );
+  }
 }

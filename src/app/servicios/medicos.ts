@@ -12,6 +12,7 @@ export class MedicosServices {
   private MedicosEspecialidad = 'http://localhost:8080/medico/m/buscarespecialidad/';
   private urlGuardar = 'http://localhost:8080/medico/m/guardarMedico/';
   private urlEliminarMedico = 'http://localhost:8080/medico/m/eliminarMedico/';
+  private urlBuscarMedico = 'http://localhost:8080/medico/m/buscaridentificador/';
 
   constructor(private httpCliente: HttpClient) { }
 
@@ -30,5 +31,10 @@ export class MedicosServices {
 
   eliminarMedico(id: number): Observable<any> {
     return this.httpCliente.post<any>(this.urlEliminarMedico, id);
+  }
+
+  buscarMedico(id: string): Observable<any> {
+    const params = new HttpParams().set('identificador', id);
+    return this.httpCliente.post<any>(this.urlBuscarMedico, null, { params });
   }
 }
