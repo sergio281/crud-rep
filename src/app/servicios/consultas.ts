@@ -44,4 +44,21 @@ export class ConsultasService {
         const params = new HttpParams().set('fecha', fecha);
         return this.httpCliente.post<number>(this.base + 'pacientesAsistieronFecha/', null, { params });
     }
+
+
+    asignarAutomaticoMujeres(): Observable<string> {
+        return this.httpCliente.post(this.base + 'asignar-automatico-m/', null, { responseType: 'text' });
+    }
+
+    asignarAutomaticoHombres(): Observable<string> {
+        return this.httpCliente.post(this.base + 'asignar-automatico-h/', null, { responseType: 'text' });
+    }
+
+    promedioEdadCardiologia(): Observable<any> {
+        return this.httpCliente.get<any>(this.base + 'promedio-edad-cardiologia/');
+    }
+
+    bonificacionMedicos(): Observable<any[]> {
+        return this.httpCliente.get<any[]>(this.base + 'bonificacion-medicos/');
+    }
 }

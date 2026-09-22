@@ -108,3 +108,53 @@
 @if (pacientesAsistieron !== null) {
 <p class="mt-2">Cantidad: {{ pacientesAsistieron }}</p>
 }
+
+
+<hr>
+
+<h4>8. Asignar citas de ginecología a mujeres mayores de 40</h4>
+<button type="button" class="btn btn-primary" (click)="asignarMujeres()">Asignar</button>
+@if (mensajeAsignacionM) {
+<p class="mt-2">{{ mensajeAsignacionM }}</p>
+
+<h4>Asignar citas de urología a hombres mayores de 50</h4>
+<button type="button" class="btn btn-primary" (click)="asignarHombres()">Asignar</button>
+@if (mensajeAsignacionH) {
+<p class="mt-2">{{ mensajeAsignacionH }}</p>
+<hr>
+}
+
+}
+
+
+<h4>9. Promedio de edad de mujeres que asisten a cardiología</h4>
+<button type="button" class="btn btn-primary" (click)="consultarPromedioCardiologia()">Consultar</button>
+@if (promedioEdadCardio !== null) {
+<p class="mt-2">Promedio: {{ promedioEdadCardio }}</p>
+}
+<hr>
+
+<h4>10. Médicos con bonificación (más de 2 citas asignadas)</h4>
+<button type="button" class="btn btn-primary" (click)="consultarBonificaciones()">Consultar</button>
+<table class="table table-dark table-hover mt-2">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Bonificación</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (fila of bonificaciones; track $index) {
+        <tr>
+            <td>{{ fila[0] }}</td>
+            <td>{{ fila[1] }}</td>
+            <td>{{ fila[2] }}</td>
+        </tr>
+        } @empty {
+        <tr>
+            <td colspan="3">Sin resultados.</td>
+        </tr>
+        }
+    </tbody>
+</table>

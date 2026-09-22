@@ -18,6 +18,10 @@ export class ConsultasComponent {
   mensajeAsistida: string = '';
   citasPorMedico: any[] = [];
   pacientesAsistieron: number | null = null;
+  mensajeAsignacionM: string = '';
+  mensajeAsignacionH: string = '';
+  promedioEdadCardio: number | null = null;
+  bonificaciones: any[] = [];
 
   constructor(private servicio: ConsultasService) { }
 
@@ -96,4 +100,48 @@ export class ConsultasComponent {
       error => console.error('Error en pacientesAsistieronFecha:', error)
     );
   }
+
+  asignarMujeres(): void {
+    this.servicio.asignarAutomaticoMujeres().subscribe(
+      dato => {
+        console.log(dato);
+        this.mensajeAsignacionM = dato;
+      },
+      error => console.error('Error en asignarAutomaticoMujeres:', error)
+    );
+  }
+
+  asignarHombres(): void {
+    this.servicio.asignarAutomaticoHombres().subscribe(
+      dato => {
+        console.log(dato);
+        this.mensajeAsignacionH = dato;
+      },
+      error => console.error('Error en asignarAutomaticoHombres:', error)
+    );
+  }
+
+  consultarPromedioCardiologia(): void {
+    this.servicio.promedioEdadCardiologia().subscribe(
+      dato => {
+        console.log(dato);
+        this.promedioEdadCardio = dato.promedioEdadMujeresCardiologia;
+      },
+      error => console.error('Error en promedioEdadCardiologia:', error)
+    );
+  }
+
+  consultarBonificaciones(): void {
+    this.servicio.bonificacionMedicos().subscribe(
+      dato => {
+        console.log(dato);
+        this.bonificaciones = dato;
+      },
+      error => console.error('Error en bonificacionMedicos:', error)
+    );
+  }
+
+
+
+
 }
