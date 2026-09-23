@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { Medicos } from '../entidades/medicos';
 import { MedicosServices } from '../servicios/medicos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EnviarDatosService } from '../servicios/enviar-datos';
 
 @Component({
   imports: [CommonModule, FormsModule],
@@ -15,9 +16,19 @@ export class MedicosComponent implements OnInit {
   medico: Medicos = new Medicos();
   bandera: boolean = false;   // false = Registrar, true = Actualizar
 
+  dataService = inject(EnviarDatosService);
+  paciente: string | null = null;
+
   constructor(private servicioMedico: MedicosServices, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    const datoActual = this.dataService.pacienteSignal();
+    console.log("Dato actual al iniciar:", datoActual);
+
+    if (datoActual) {
+      this.paciente = datoActual;
+    }
+
     this.listarMedico();
   }
 
